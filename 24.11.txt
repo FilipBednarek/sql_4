@@ -1,0 +1,73 @@
+select length("Paweł")
+select char_length("Paweł")
+select length("")
+
+select title, left(title, 7), mid(title, 5, 7), right(title, 7) from sakila.film
+
+    
+select subtime('01:40:00', '01:10:00')
+select subtime('16:15:53', '9:56:12'); 
+
+
+select title, left(description, 7), mid(description, 5, 7), right(description, 7) from film; 
+
+select title, locate('dinosaur', title) from film WHERE title like '%dinosaur%';
+
+select title, actor.first_name, actor.last_name, locate('life', title) from film
+	join film_actor on film_actor.film_id = film.film_id
+	join actor on actor.actor_id = film_actor.actor_id
+	where locate('life', title);
+
+
+select first_name as "imie", last_name as "nazwisko" from sakila.actor
+	order by last_name limit 10 OFFSET 4;
+         
+select title, replacement_cost from sakila.film 
+	order by replacement_cost  desc, title;
+
+select title, release_year replacement_cost from sakila.film 
+	order by replacement_cost  desc, title;
+
+
+stworz zapytanie sortujace i podaj definicje zaleznosci i pierwszenstwa wynikow sortowania
+	select title, rental_rate from sakila.film where rental_rate > 1 and rental_rate <5 
+		order by rental_rate  DESC;
+
+
+zapytanie stworz przetestuj w sql warunki wielokrotnie zlozone (oddzielone or, and) tj. wiele warunkow 
+w jednym zapyrtaniu, korzystaj z nawiasow
+co na pierwszenstwo or czy and
+	Pierwszeństwo ma AND
+
+select title, description, rating from sakila.film where description 
+	LIKE '%drama%' AND rating in ('G') order by title;
+
+select customer_id, return_date from rental where rental_date BETWEEN '2005-06-30 13:00:000' and 	'2005-07-31 3:00:000' order by return_date; 
+
+select FIRST_name, last_name from sakila.customer
+where left(last_name, 1) BETWEEN 'D' and 'E' order by last_name;
+
+select FIRST_name, last_name from sakila.customer
+where right(last_name, 1) BETWEEN 'D' and 'E' order by last_name;
+
+
+select title from film where title like 'a%' or title like 'b%';
+
+select title from film where title regexp '^[a-e]';
+
+select title from film where title regexp 'w$'; 
+
+select title from film where title regexp 'a.c';
+
+
+
+
+
+
+
+
+
+
+
+
+

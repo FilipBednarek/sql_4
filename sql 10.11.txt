@@ -1,0 +1,78 @@
+SELECT DISTINCT tytul FROM filmy 
+	JOIN kopie ON kopie.id_filmu = filmy.id_filmu 
+	JOIN wypozyczenia ON wypozyczenia.id_kopii = kopie.id_kopii 
+	WHERE wypozyczenia.data_wypozyczenia BETWEEN '2005-07-15' AND '2005-07-25' ORDER BY `filmy`.`tytul` ASC =>tytul pomiedzy datami wypo. filmu
+
+SELECT klienci.imie, aktorzy.imie, aktorzy.nazwisko FROM aktorzy
+	JOIN klienci ON klienci.imie = aktorzy.imie;
+
+
+	UNION
+		• suma zbiorów
+		• eliminuje duplikaty
+	UNION ALL 
+		• suma zbiorów
+		• nie eliminuje duplikatów
+	INTERSECT
+		• część wspólna zbiorów 
+		• eliminuje duplikaty
+	MINUS (standard SQL: EXCEPT)
+		• różnica zbiorów 
+		• eliminuje duplikaty
+
+	SELECT etat
+		FROM pracownicy
+		WHERE id_zesp = 20
+		MINUS
+		SELECT etat
+		FROM pracownicy
+		WHERE id_zesp = 30 ORDER BY etat;
+	SELECT nazwisko
+		FROM pracownicy
+		UNION
+		SELECT nazwa
+		FROM zespoly;
+
+
+
+SELECT nazwisko FROM aktorzy 
+	UNION 
+	SELECT nazwisko FROM klienci ORDER BY `nazwisko` ASC => wspolne nazwiska klientow i aktorow 
+
+
+	SELECT tytul FROM filmy 
+		join obsada on obsada.id_filmu = filmy.id_filmu
+		JOIN aktorzy on aktorzy.id_aktora = obsada.id_aktora
+		WHERE aktorzy.nazwisko = 'De Niro' 
+		INTERSECT 
+	SELECT tytul FROM filmy 
+		join obsada on obsada.id_filmu = filmy.id_filmu
+		JOIN aktorzy on aktorzy.id_aktora = obsada.id_aktora
+		WHERE aktorzy.nazwisko = 'Reno';
+
+
+SELECT tytul FROM filmy 
+	join kopie on kopie.id_filmu = filmy.id_filmu
+	JOIN wypozyczenia on wypozyczenia.id_kopii= kopie.id_kopii
+	JOIN klienci on klienci.id_klienta = wypozyczenia.id_klienta
+	WHERE klienci.nazwisko = 'Kowalski'
+INTERSECT
+SELECT tytul FROM filmy 
+	join kopie on kopie.id_filmu = filmy.id_filmu
+	JOIN wypozyczenia on wypozyczenia.id_kopii= kopie.id_kopii
+	JOIN klienci on klienci.id_klienta = wypozyczenia.id_klienta
+	WHERE klienci.nazwisko = 'Nowak';
+
+
+
+SELECT nazwisko FROM aktorzy 
+	join obsada on obsada.id_aktora = aktorzy.id_aktora
+	JOIN filmy on filmy.id_filmu = obsada.id_filmu
+	WHERE filmy.tytul = 'Terminator'
+except
+SELECT nazwisko FROM aktorzy 
+	join obsada on obsada.id_aktora = aktorzy.id_aktora
+	JOIN filmy on filmy.id_filmu = obsada.id_filmu
+	WHERE filmy.tytul ='Ghostbustres'  
+
+

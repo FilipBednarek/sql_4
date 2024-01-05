@@ -1,0 +1,24 @@
+select * FROM customer WHERE customer.store_id = 2 AND customer.active = 0;
+select * FROM film WHERE film.replacement_cost BETWEEN 25 AND 30 ORDER BY film.rental_rate LIMIT 100; 
+
+UPDATE sakila.country set country.country = 'Polska' WHERE country.country_id = 76;
+
+
+insert INTO sakila.city values(601, 'Gliwice', '76', '2020-09-10 10:10:10'); 
+insert INTO sakila.city values('','Gliwice', '76', ''); 
+
+create table liczby(
+a INT,
+b int,
+c float,
+d float, 
+e double,
+f double,
+g decimal(4,2),
+h decimal(4,2));
+
+insert into liczby values(1, 2,1.1,2.2,1.1,2.2,1.1,2.2); 
+select a+b from liczby; 
+select a+b, c+d, e+f, g+h, a+b> 3 from liczby
+
+	
